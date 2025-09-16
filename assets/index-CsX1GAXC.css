@@ -67,3 +67,6 @@
 .section-margin-top {
     margin-top: 48px; /* Это стандартный отступ, который вы хотели */
 }
+.form-visible {
+    display: block !important;
+}
