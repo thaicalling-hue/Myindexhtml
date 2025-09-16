@@ -1187,10 +1187,10 @@
     </main>
  
  </div>
-<script>
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contact-form');
     const webhookUrl = 'https://difieplewitie.beget.app/webhook/d0f4741b-2111-424b-96f8-e7119b5cbe6c';
+    const formMessage = document.getElementById('form-message');
 
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Останавливаем стандартную отправку формы
@@ -1207,21 +1207,34 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => {
             if (response.ok) {
-                // Если заявка отправлена успешно
-			alert('Ваша заявка успешно отправлена. Я свяжусь с вами в ближайшее время!');
+                // Показываем сообщение об успехе
+                formMessage.textContent = 'Ваша заявка успешно отправлена. Я свяжусь с вами в ближайшее время!';
+                formMessage.style.backgroundColor = '#28a745'; // Зеленый фон для успеха
+                formMessage.style.color = '#fff';
+                formMessage.style.display = 'block';
                 form.reset(); // Очищаем форму
+
+                // Скрываем сообщение через 5 секунд
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 5000);
             } else {
-                // Если произошла ошибка
-                alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже.');
+                // Показываем сообщение об ошибке
+                formMessage.textContent = 'Произошла ошибка при отправке. Пожалуйста, попробуйте позже.';
+                formMessage.style.backgroundColor = '#dc3545'; // Красный фон для ошибки
+                formMessage.style.color = '#fff';
+                formMessage.style.display = 'block';
             }
         })
         .catch(error => {
-            // Если произошла ошибка сети
-            alert('Произошла ошибка. Пожалуйста, проверьте ваше интернет-соединение.');
+            // Показываем сообщение о сетевой ошибке
+            formMessage.textContent = 'Произошла ошибка. Пожалуйста, проверьте интернет-соединение.';
+            formMessage.style.backgroundColor = '#dc3545';
+            formMessage.style.color = '#fff';
+            formMessage.style.display = 'block';
         });
     });
 });
-</script>
 </body>
 
 </html>
