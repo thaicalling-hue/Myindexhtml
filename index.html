@@ -1188,54 +1188,54 @@
  
  </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('contact-form');
-        const webhookUrl = 'https://difieplewitie.beget.app/webhook/d0f4741b-2111-424b-96f8-e7119b5cbe6c';
-        const formMessage = document.getElementById('form-message');
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
+    const webhookUrl = 'https://difieplewitie.beget.app/webhook/d0f4741b-2111-424b-96f8-e7119b5cbe6c';
+    const formMessage = document.getElementById('form-message');
 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Останавливаем стандартную отправку формы
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Останавливаем стандартную отправку формы
 
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
 
-            fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Показываем сообщение об успехе
-                    formMessage.textContent = 'Ваша заявка успешно отправлена. Я свяжусь с вами в ближайшее время!';
-                    formMessage.style.backgroundColor = '#28a745'; // Зеленый фон для успеха
-                    formMessage.style.color = '#fff';
-                    formMessage.style.display = 'block';
-                    form.reset(); // Очищаем форму
+        // Получаем имя из поля 'name'
+        const userName = data.name || 'Ваша заявка';
 
-                    // Скрываем сообщение через 15 секунд
-                    setTimeout(() => {
-                        formMessage.style.display = 'none';
-                    }, 15000);
-                } else {
-                    // Показываем сообщение об ошибке
-                    formMessage.textContent = 'Произошла ошибка при отправке. Пожалуйста, попробуйте позже.';
-                    formMessage.style.backgroundColor = '#dc3545'; // Красный фон для ошибки
-                    formMessage.style.color = '#fff';
-                    formMessage.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                // Показываем сообщение о сетевой ошибке
-                formMessage.textContent = 'Произошла ошибка. Пожалуйста, проверьте интернет-соединение.';
+        fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Используем имя в сообщении
+                formMessage.textContent = `Ваша заявка успешно отправлена, ${userName}. Я свяжусь с вами в ближайшее время!`;
+                formMessage.style.backgroundColor = '#28a745';
+                formMessage.style.color = '#fff';
+                formMessage.style.display = 'block';
+                form.reset();
+
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 15000);
+            } else {
+                formMessage.textContent = 'Произошла ошибка при отправке. Пожалуйста, попробуйте позже.';
                 formMessage.style.backgroundColor = '#dc3545';
                 formMessage.style.color = '#fff';
                 formMessage.style.display = 'block';
-            });
+            }
+        })
+        .catch(error => {
+            formMessage.textContent = 'Произошла ошибка. Пожалуйста, проверьте интернет-соединение.';
+            formMessage.style.backgroundColor = '#dc3545';
+            formMessage.style.color = '#fff';
+            formMessage.style.display = 'block';
         });
     });
+});
 </script>
 </body>
 
