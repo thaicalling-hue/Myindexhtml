@@ -67,6 +67,18 @@
 .section-margin-top {
     margin-top: 48px; /* Это стандартный отступ, который вы хотели */
 }
-.form-visible {
-    display: block !important;
+
+.btn-equal-width {
+    min-width: 250px;
+}
+
+.btn-secondary {
+    background-color: #171526 !important;
+    border: 2px solid #5d46a8 !important; /* Пример фиолетового цвета */
+}
+
+.highlight-text {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #fff !important; /* Делает текст белым */
 }
